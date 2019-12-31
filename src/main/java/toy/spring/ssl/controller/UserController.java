@@ -18,6 +18,8 @@ public class UserController {
         user.setEmail("test@test.com");
         user.setPassword("password");
 
-        return service.save(user);
+        service.save(user);
+
+        return user;
     }
 }

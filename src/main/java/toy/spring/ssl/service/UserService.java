@@ -1,5 +1,7 @@
 package toy.spring.ssl.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository repository;
@@ -25,8 +28,9 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        User user = repository.findById(userId);
+        logger.warn("find db user : {}", user);
 
         /**
          * The Other ...
@@ -40,7 +44,7 @@ public class UserService implements UserDetailsService {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 List<GrantedAuthority> authorities = new ArrayList<>();
-                authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
                 return authorities;
             }
@@ -77,7 +81,7 @@ public class UserService implements UserDetailsService {
         };
     }
 
-    public User save(User user) {
+    public int save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return repository.save(user);

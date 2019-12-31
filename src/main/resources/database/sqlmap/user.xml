@@ -5,28 +5,13 @@
     <!-- Mapper -->
     <resultMap id="User" type="User" />
 
-    <!-- Sample select Query -->
-    <select id="selectUser" resultMap="User">
-        SELECT * FROM users WHERE user_id = 'test';
-    </select>
-
-    <select id="selectUserList" resultMap="User">
-        SELECT * FROM users;
-    </select>
-
-    <insert id="insertUser" parameterType="User">
-        INSERT INTO users (user_id, password, email, phone) VALUES (#{userId}, #{password}, #{email}, #{phone})
+    <!-- Sample Query -->
+    <insert id="createUser" parameterType="User">
+        INSERT INTO users (user_id, password, email, role) VALUES (#{userId}, #{password}, #{email}, #{role})
     </insert>
 
-    <update id="updateUser" parameterType="User">
-        UPDATE users SET password = #{password}, email = #{email} WHERE user_id = #{userId};
-    </update>
-
-    <select id="selectUserById" parameterType="String" resultMap="User">
+    <select id="selectByUserId" parameterType="String" resultMap="User">
         SELECT * FROM users WHERE user_id = #{userId}
     </select>
 
-    <select id="deleteUser" parameterType="String">
-        DELETE from users where user_id = #{userId}
-    </select>
 </mapper>
