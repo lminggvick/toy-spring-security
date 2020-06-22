@@ -8,7 +8,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="User" type="toy.spring.ssl.domain.User"/>
+		<typeAlias alias="User" type="toy.spring.ssl.domain.model.User"/>
 	</typeAliases>
 
 	<typeHandlers>

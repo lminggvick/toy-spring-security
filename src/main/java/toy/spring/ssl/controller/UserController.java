@@ -3,7 +3,7 @@ package toy.spring.ssl.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import toy.spring.ssl.domain.User;
+import toy.spring.ssl.domain.model.User;
 import toy.spring.ssl.service.UserService;
 
 @RestController

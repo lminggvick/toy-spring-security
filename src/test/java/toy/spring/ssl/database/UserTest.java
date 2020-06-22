@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
-import toy.spring.ssl.domain.User;
+import toy.spring.ssl.domain.model.User;
+import toy.spring.ssl.domain.type.UserRoleType;
 import toy.spring.ssl.repository.UserRepository;
+import toy.spring.ssl.service.UserService;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -20,21 +22,18 @@ public class UserTest {
     private static final Logger logger = LoggerFactory.getLogger(UserTest.class);
 
     @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService service;
 
     @Test
     public void crud() {
-        User user = new User("root", passwordEncoder.encode("password"), "root@root.com", "ROLE_ROOT");
+        User user = new User("test", "123", "test@test.com", UserRoleType.USER.getName());
 
         logger.info("User : {}", user);
 
-        int row = repository.save(user);
+        int row = this.service.save(user);
         assertThat(row, is(1));
 
-        User dbUser = repository.findById("root");
+        User dbUser = this.service.findById("test");
         assertThat(dbUser, is(user));
     }
 }
