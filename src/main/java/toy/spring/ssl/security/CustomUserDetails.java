@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class CustomUserDetails implements UserDetails {
+    public static final String ROLE_PREFIX = "ROLE_";
     private User user;
 
     public CustomUserDetails(User user) {

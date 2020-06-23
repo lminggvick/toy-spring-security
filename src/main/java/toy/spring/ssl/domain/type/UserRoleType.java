@@ -9,10 +9,10 @@ public enum UserRoleType implements TypeMapper {
     /**
      * 유저 권한
      */
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER"),
+    ADMIN("ADMIN"),
+    USER("USER"),
 
-    UNKNOWN("Mismatch Property Type");
+    ANONYMOUS("ANONYMOUS");
 
     private String name;
 
